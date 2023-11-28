@@ -8,26 +8,42 @@ import matplotlib.pyplot as plt
 df_censo = pd.read_csv('./assets/data/censo_estadual_2007_a_2022.csv', encoding='latin-1', delimiter=',', low_memory=False)
 df_censo.drop(columns='Unnamed: 0', inplace=True)
 
-numero = df_censo.groupby('NU_ANO_CENSO')[['NO_ENTIDADE']].count()
+reducao_rede_estadual = df_censo.groupby('NU_ANO_CENSO')[['NO_ENTIDADE']].count()
 
 
-cores = []
-for ano in numero.index:
-    if ano == 2022:
-        cores.append('green')
-    else:
-        cores.append('silver')
-        
-fig, ax = plt.subplots(figsize=(12,5))
-ax.barh(numero.index, numero['NO_ENTIDADE'], color=cores)
+years = [ 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 
+        2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
 
-for i, v in enumerate(numero['NO_ENTIDADE']):
-    ax.text(v + 20,i,  str(v), color='black', fontsize=10, ha='left', va='center')
-
-ax.set_frame_on(False)
-ax.get_xaxis().set_visible(False)
-ax.tick_params(axis='both', which='both', length=0)
+fig = go.Figure()
+fig.add_trace(go.Bar(x=years,
+                y=reducao_rede_estadual['NO_ENTIDADE'],
+                name='n',
+                marker_color='rgb(55, 83, 109)', 
+                text=reducao_rede_estadual['NO_ENTIDADE']
+                ))
+fig.update_xaxes(dtick=[ 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 
+        2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022])
+fig.update_layout(
+    title='Redução do Número de Escolas da Rede Estadual de Educação de 2007 a 2022',
+    xaxis_tickfont_size=14,
+    yaxis=dict(
+        title='Número de Escolas',
+        titlefont_size=14,
+        tickfont_size=12,
+    ),
+    legend=dict(
+        x=0,
+        y=1.0,
+        bgcolor='rgba(255, 255, 255, 0)',
+        bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.15, # gap between bars of adjacent location coordinates.
+    bargroupgap=0.1 # gap between bars of the same location coordinate.
+)
 fig.show()
+
+
 
 
 register_page(__name__, path="/", icon="fa-solid:home")
@@ -36,7 +52,7 @@ register_page(__name__, path="/", icon="fa-solid:home")
 
 layout = dmc.Container(
     [
-        dmc.Title("Dashboard Censo Escolar"),
+        #dmc.Title("Dashboard Censo Escolar"),
         dcc.Markdown(
             """
             This is a demo of a multi-page app with nested folders in the `pages` folder.  
@@ -74,9 +90,10 @@ layout = dmc.Container(
             ``` 
             
             """
-        )
-        , html.Div(
+        ),
+        html.Div(
             dcc.Graph(figure=fig)
         )
+        
     ]
 )

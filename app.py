@@ -79,9 +79,10 @@ app.layout = dmc.Container(
         dmc.Header(
             height=70,
             children=[
-                dmc.Image("./assets/logo_see.jpeg", height=70, width=300, withPlaceholder=True
-                )],
-            style={"backgroundColor": "#ffffff"},
+                dmc.Image("./assets/logo_see.jpeg", height=70, width=300),
+                dmc.Title('Dashboard Censo Escolar - Rede Estadual', align='right')
+            ],
+            style={"backgroundColor": "#FFFFFF"}
         ),
         sidebar,
         dmc.Container(
