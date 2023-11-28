@@ -3,9 +3,34 @@ from dash import dcc, html, Output, Input, State
 import dash_mantine_components as dmc
 from dash_iconify import DashIconify
 import matplotlib.pyplot as plt
+import dash_bootstrap_components as dbc
+
+header_style = {
+    "display": "flex",  # Use Flexbox layout
+    "justifyContent": "space-between",  # Align children with space between (left and right)
+    "alignItems": "center",  # Center the content vertically (top and bottom)
+    #"border-bottom": "solid grey 3px",
+    #"border": f"1px solid {dmc.theme.DEFAULT_COLORS['green'][4]}",
+    "background-color": "#f7f7fa",
+}
+
+container_style = {
+    "display": "flex",  # Use Flexbox layout
+    "justifyContent": "space-between",  # Align children with space between (left and right)
+    "width": "90%",  # Stretch container to 100% of the page width
+    "height": "100%",  # Stretch container to 100% of the page width
+    #"border": f"1px solid {dmc.theme.DEFAULT_COLORS['blue'][4]}",
+}
+
+avatar_style = {
+    "margin-left": "auto",  # Display the avatar on the right side of the container
+    "height": "95%",
+    "padding-top": "1px",
+    #"border-radius": "50%",  # Create curve around the picture
+}
 
 
-app = dash.Dash(__name__, use_pages=True)
+app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 
 def create_nav_link(icon, label, href):
@@ -77,12 +102,19 @@ sidebar = dmc.Navbar(
 app.layout = dmc.Container(
     [
         dmc.Header(
-            height=70,
+            height=80,
             children=[
-                dmc.Image("./assets/logo_see.jpeg", height=70, width=300),
-                dmc.Title('Dashboard Censo Escolar - Rede Estadual', align='right')
-            ],
-            style={"backgroundColor": "#FFFFFF"}
+                dmc.Container(
+                    children=[
+                        html.H2(children="Dashboard Censo da Educação - Rede Estadual", style={"margin-left": "10px", "padding-top": "-5px"}),
+                        html.Img(
+                            src='./assets/logo_see.jpeg',
+                            alt="Logomarca SEE",
+                            style=avatar_style
+                        ),
+                    ], size="xl", px="xl", style=container_style,
+                ),
+            ], style=header_style,
         ),
         sidebar,
         dmc.Container(
