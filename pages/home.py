@@ -105,9 +105,9 @@ register_page(__name__, path="/", icon="fa-solid:home")
 
 layout = html.Div(children=[
     html.Br(),
-    dcc.Graph(figure=fig),
+    dcc.Graph(figure=fig, responsive=True),
     html.Br(),
-    dcc.Graph(figure=numero_matriculas),
+    dcc.Graph(figure=numero_matriculas, responsive=True),
 
 ]
             
