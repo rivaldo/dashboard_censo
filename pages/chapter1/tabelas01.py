@@ -18,7 +18,7 @@ dados_conectividade = dados[[
     'IN_INTERNET', 'IN_INTERNET_ALUNOS', 
     'IN_INTERNET_ADMINISTRATIVO', 'IN_INTERNET_APRENDIZAGEM',
     'IN_BANDA_LARGA','TP_REDE_LOCAL'
-]]
+]].copy()
 
 #Renomeando os campos para utilizar
 dados_conectividade.rename(columns={

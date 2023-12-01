@@ -19,7 +19,7 @@ dados_conectividade = dados[[
     'IN_INTERNET_ADMINISTRATIVO', 'IN_INTERNET_APRENDIZAGEM',
     'IN_BANDA_LARGA','TP_REDE_LOCAL'
 ]]
-
+dados_conectividade = dados_conectividade.copy()
 #Renomeando os campos para utilizar
 dados_conectividade.rename(columns={
     'NU_ANO_CENSO':'Ano do Censo', 'NO_ENTIDADE':'Nome da Escola','CO_ORGAO_REGIONAL':'Gerencia Regional' ,
@@ -188,16 +188,37 @@ fig04.update_layout(
 #style={'display':'compact'}
 )
 """
-layout = dash_table.DataTable(
-    id='table',
-    data=rede_local.to_dict('records'),
-    columns=[{'name': i, 'id':i} for i in rede_local.columns],
-    page_action='none',
-    style_table={'height': '300px', 'overflowY': 'auto', },
-    style_cell={'textAlign': 'center'},
-    style_as_list_view=True,
-    style_header={
-        'background':'rgb(220, 220, 220)',
-        'fontWeight': 'bold'
-    }
+layout = html.Div(
+    children=[
+        html.H1('Informação sobre conectividade'),
+        dash_table.DataTable(
+            id='table',
+            data=rede_local.to_dict('records'),
+            columns=[{'name': i, 'id':i} for i in rede_local.columns],
+            page_action='none',
+            style_table={'height': '300px', 'overflowY': 'auto', },
+            style_cell={'textAlign': 'center'},
+            style_as_list_view=True,
+            style_header={
+                'background':'rgb(220, 220, 220)',
+                'fontWeight': 'bold'
+            }
+        ),
+        html.Title('Informação sobre conectividade'),
+        dash_table.DataTable(
+            id='table',
+            data=rede_local.to_dict('records'),
+            columns=[{'name': i, 'id':i} for i in rede_local.columns],
+            page_action='none',
+            style_table={'height': '300px', 'overflowY': 'auto', },
+            style_cell={'textAlign': 'center'},
+            style_as_list_view=True,
+            style_header={
+                'background':'rgb(220, 220, 220)',
+                'fontWeight': 'bold'
+            }
+        )
+    ]
 )
+
+
