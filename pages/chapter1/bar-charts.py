@@ -5,7 +5,8 @@ import pandas as pd
 
 register_page(__name__, icon="fa:bar-chart")
 
-
+dados_conectividade = pd.read_csv('./assets/data/censo_estadual_2007_a_2022.csv', encoding='latin-1', delimiter=',', low_memory=False)
+dados_conectividade.drop(columns='Unnamed: 0', inplace=True)
 
 df = px.data.tips()
 days = df.day.unique()
