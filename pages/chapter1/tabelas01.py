@@ -154,9 +154,35 @@ fig02.update_layout(
 )
 
 
+fig = go.Figure()
+
+""" fig.add_trace(go.Indicator(
+    mode = "number+delta",
+    value = 200,
+    domain = {'x': [0, 0.5], 'y': [0, 0.5]},
+    delta = {'reference': 400, 'relative': True, 'position' : "top"}))
+
+fig.add_trace(go.Indicator(
+    mode = "number+delta",
+    value = 350,
+    delta = {'reference': 400, 'relative': True},
+    domain = {'x': [0, 0.5], 'y': [0.5, 1]})) """
+
+fig.add_trace(go.Indicator(
+    mode = "number",
+    value = 450,
+    title = {
+        "text": "Número de Esolas da Rede Estadual<br>"
+        "<span style='font-size:0.8em;color:gray'>Microdados - Cernso 2022</span>" +
+        "<br><span style='font-size:0.8em;color:gray'>fonte: INEP</span>"},
+    domain = {'x': [0.1, 1], 'y': [0, 1]}))
+
+
 
 
 layout = html.Div(children=[
+    html.Br(),
+    html.Div(dcc.Graph(figure=fig, responsive=True), ),
     html.Br(),
     html.Div(dcc.Graph(figure=fig01, responsive=True), ),
     html.Br(),
