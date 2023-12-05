@@ -54,7 +54,7 @@ fig.update_layout(
 
 ########GRÁFICO NUMERO DE MATRICULAS TOTAIS, FEMININAS E MASCULINAS##########
 numero_matriculas = go.Figure()
-numero_matriculas.add_trace(go.Bar(x=years,
+""" numero_matriculas.add_trace(go.Bar(x=years,
                 y=numero_estudantes['QT_MAT_BAS_MASC'],
                 name='Número de matrículas masculinas',
                 marker_color='rgb(0,0,255)', 
@@ -65,7 +65,7 @@ numero_matriculas.add_trace(go.Bar(x=years,
                 name='Número de matrículas femininas',
                 marker_color='rgb(255,0,0)', 
                 text=numero_estudantes['QT_MAT_BAS_FEM']
-                ))
+                )) """
 numero_matriculas.add_trace(go.Bar(x=years,
                 y=numero_estudantes['QT_MAT_BAS'],
                 name='Número de matrícula total',

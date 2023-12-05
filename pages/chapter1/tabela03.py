@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 
-register_page(__name__, icon="fa:table", name='Tipo de Interligação de Rede nas Escolas')
+register_page(__name__, icon="fa:table", name='Escolas Técnicas')
 #Leitura do dataset
 dados = pd.read_csv('./assets/data/dados_completos_644_escolas.csv', sep=',', low_memory=False)
 dados.drop(columns='Unnamed: 0', inplace=True)
@@ -32,53 +32,11 @@ dados_conectividade.rename(columns={
     inplace=True
 )
 
-labels = ['Não', 'Sim']
-classes = [-1, 0, 1]
 
-escolas_com_internet = pd.Series.value_counts(
-    pd.cut(
-        x = dados_conectividade['Acesso a Internet'],
-        bins = classes,
-        labels=labels,
-        include_lowest=True
-    )
-)
-escolas_com_internet_percentual = pd.Series.value_counts(
-    pd.cut(
-        x = dados_conectividade['Acesso a Internet'],
-        bins = classes,
-        labels=labels,
-        include_lowest=True
-    ),
-    normalize=True
-).round(3)*100
-
-escolas_com_internet_dataframe = pd.DataFrame({
-    'A escola possui acesso a internet ?':escolas_com_internet.index,
-    'Número de Escolas da Rede Estadual com Internet':escolas_com_internet.array,
-    'Percentual das Escolas da Rede Estadual com Internet (%)':escolas_com_internet_percentual.array
-    
-    
-})
 layout = html.Div(
     children=[
-        html.H1('Informação sobre conectividade'),
-        
-        html.Div(
-            dash_table.DataTable(
-            id='table',
-            data=escolas_com_internet_dataframe.to_dict('records'),
-            columns=[{'name': i, 'id':i} for i in escolas_com_internet_dataframe.columns],
-            page_action='none',
-            style_table={'height': '750px', 'overflowY': 'auto', },
-            style_cell={'textAlign': 'center'},
-            style_as_list_view=False,
-            style_header={
-                'background':'rgb(220, 220, 220)',
-                'fontWeight': 'bold'
-            }
-            )
-        ),
+        html.Div('Tabela 03')
+            
         
     ]
 )
