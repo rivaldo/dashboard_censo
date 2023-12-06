@@ -40,7 +40,7 @@ labels = [
     'Rede sem fio(wi-fi)',
     'Rede cabeada e sem fio(wi-fi)',
 ]
-classes = [0.0, 1.0, 2.0, 3.0, 9.0 ]
+classes = [0, 1, 2, 3, 9 ]
 rede_local = pd.Series.value_counts(
     pd.cut(
         x = dados_conectividade['Tipo de Rede Local'],
@@ -54,24 +54,62 @@ rede_local = pd.DataFrame({
     'Número de escolas' : rede_local.array
 })
 
+#########################################################################
+fig01 = go.Figure()
+
+fig01.add_trace(go.Indicator(
+    mode = "number",
+    value = dados.loc[dados['TP_REDE_LOCAL'] == 0]['NO_ENTIDADE'].count(),
+    domain = {'x': [0, 0.4], 'y': [0.8, 1]},
+    title = {"text": "<span style='font-size:1em'>Não Há Rede Local Interligando Computadores - 2022</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {
+        "font":{"size":68, }
+        },
+    )) 
+
+fig01.add_trace(go.Indicator(
+    mode = "number",
+    value = dados.loc[dados['TP_REDE_LOCAL'] == 1]['TP_REDE_LOCAL'].count(),
+    domain = {'x': [0, 0.4], 'y': [0, 0.2]},
+    title = {"text": "<span style='font-size:1em'><br>Rede cabeada - 2022</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {"font":{"size":68, }},
+    )) 
+fig01.add_trace(go.Indicator(
+    mode = "number",
+    value = dados.loc[dados['TP_REDE_LOCAL'] == 2]['TP_REDE_LOCAL'].count(),
+    domain = {'x': [0.8, 1], 'y': [0.8, 1]},
+    title = {"text": "<span style='font-size:1em'>Rede sem fio(wi-fi) - 2022</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - 2022 - INEP</span>"},
+    number = {"font":{"size":68, }}
+    )) 
+fig01.add_trace(go.Indicator(
+    mode = "number",
+    value = dados.loc[dados['TP_REDE_LOCAL'] == 3]['TP_REDE_LOCAL'].count(),
+    domain = {'x': [0.8, 1], 'y': [0, 0.2]},
+    title = {"text": "<span style='font-size:1em'>Rede cabeada e sem fio(wi-fi) - 2022</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {
+        "font":{
+            "size":68,
+            }, 
+        
+        
+    },
+    
+    ))
+
+
+fig01.update_layout(paper_bgcolor = "lightblue")
+
 
 
 layout = html.Div(
     children=[
-        html.H3('Tipo de conectividade encontrada nas escolas'),
-        dash_table.DataTable(
-            id='table',
-            data=rede_local.to_dict('records'),
-            columns=[{'name': i, 'id':i} for i in rede_local.columns],
-            page_action='none',
-            style_table={'height': '300px', 'overflowY': 'auto', },
-            style_cell={'textAlign': 'center'},
-            style_as_list_view=True,
-            style_header={
-                'background':'rgb(220, 220, 220)',
-                'fontWeight': 'bold'
-            }
-        ),
+        html.H3('Tipo de conectividade encontrada nas escolas - Censo 2022'),
+        html.Br(),
+        html.Div(dcc.Graph(figure=fig01))
     ]
 )
 
