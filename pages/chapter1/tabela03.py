@@ -7,9 +7,9 @@ import plotly.graph_objects as go
 
 register_page(__name__, icon="fa:table", name='03 - Escolas Técnicas')
 #Leitura do dataset
-dados = pd.read_csv('./assets/data/dados_completos_644_escolas.csv', sep=',', low_memory=False)
+dados = pd.read_csv('./assets/data/dados_completos_644_escolas.csv', sep=',', low_memory=False, encoding='latin-1')
 dados.drop(columns='Unnamed: 0', inplace=True)
-dados_16_anos = pd.read_csv('./assets/data/dados_completos_644_escolas.csv', sep=',', low_memory=False)
+dados_16_anos = pd.read_csv('./assets/data/censo_estadual_2007_a_2022.csv', sep=',', low_memory=False, encoding='latin-1')
 dados_16_anos.drop(columns='Unnamed: 0', inplace=True)
 
 escolas_profissionalizantes_16_anos = dados_16_anos.groupby('NU_ANO_CENSO')[['IN_PROF']].sum()
@@ -27,11 +27,11 @@ years = [ 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
         2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
 ########GRAFICO EVOLUÇÃO DOS ECITS##################
 fig = go.Figure()
-fig.add_trace(go.Line(x=years,
-                y=dados_16_anos['IN_PROF'],
+fig.add_trace(go.Bar(x=years,
+                y=df_escolas_profissionalizantes_16_anos['Número de Escolas Profissionalizantes'],
                 name='Número de escolas',
                 marker_color='rgb(55, 83, 109)', 
-                text=dados_16_anos['IN_PROF']
+                text=df_escolas_profissionalizantes_16_anos['Número de Escolas Profissionalizantes']
                 ))
 fig.update_xaxes(dtick=[ 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 
         2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022])
@@ -65,7 +65,21 @@ fig.update_layout(
 
 layout = html.Div(
     children=[
-        html.Div(dcc.Graph(figure=fig)),
+        html.Div(dcc.Graph(figure=fig, responsive=True)),
         html.Br(),
+        html.H3('Tipo de conectividade encontrada nas escolas'),
+        dash_table.DataTable(
+            id='table',
+            data=df_escolas_profissionalizantes_16_anos.to_dict('records'),
+            columns=[{'name': i, 'id':i} for i in df_escolas_profissionalizantes_16_anos.columns],
+            page_action='none',
+            style_table={'height': '300px', 'overflowY': 'auto', },
+            style_cell={'textAlign': 'center'},
+            style_as_list_view=True,
+            style_header={
+                'background':'rgb(220, 220, 220)',
+                'fontWeight': 'bold'
+            }
+        ),
     ]
 )
