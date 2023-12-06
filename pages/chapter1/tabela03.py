@@ -27,11 +27,11 @@ years = [ 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
         2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
 ########GRAFICO EVOLUÇÃO DOS ECITS##################
 fig = go.Figure()
-fig.add_trace(go.Line(x=years,
-                y=dados_16_anos['IN_PROF'],
+fig.add_trace(go.Bar(x=df_escolas_profissionalizantes_16_anos['Ano do Censo'],
+                y=df_escolas_profissionalizantes_16_anos['Número de Escolas Profissionalizantes'],
                 name='Número de escolas',
                 marker_color='rgb(55, 83, 109)', 
-                text=dados_16_anos['IN_PROF']
+                text=df_escolas_profissionalizantes_16_anos['Número de Escolas Profissionalizantes']
                 ))
 fig.update_xaxes(dtick=[ 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 
         2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022])
