@@ -35,7 +35,7 @@ fig.add_trace(go.Indicator(
     domain = {'x': [0.5, 1], 'y': [0.5, 1]},
     title = {"text": "<span style='font-size:1em'>Redução da Rede Escolar de 2007 a 2022</span><br>"
             "<span style='font-size:0.4em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
-    number = {"font":{"size":68, 'color':'red'}, 'suffix':'%',
+    number = {"prefix":"&#129047;","font":{"size":68, 'color':'red'}, 'suffix':'%',
         'valueformat':'.2f', }
     )) 
 
@@ -103,7 +103,7 @@ fig01.add_trace(go.Indicator(
 
 fig01.update_layout(paper_bgcolor = "lightblue")
 
-
+######################################################################################
 
 #####################################################################################
 layout = html.Div(children=[

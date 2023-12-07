@@ -4,6 +4,8 @@ import dash_mantine_components as dmc
 from dash_iconify import DashIconify
 import matplotlib.pyplot as plt
 import dash_bootstrap_components as dbc
+import os
+
 
 header_style = {
     "display": "flex",  # Use Flexbox layout
@@ -26,7 +28,6 @@ avatar_style = {
     "margin-left": "auto",  # Display the avatar on the right side of the container
     "height": "95%",
     "padding-top": "1px",
-    #"border-radius": "50%",  # Create curve around the picture
 }
 
 
