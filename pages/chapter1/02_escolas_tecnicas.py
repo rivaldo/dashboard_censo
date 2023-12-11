@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 
-register_page(__name__, icon="fa:table", name='03 - Escolas Técnicas')
+register_page(__name__, icon="fa:table", name='02 - Escolas Técnicas - Números')
 #Leitura do dataset
 dados = pd.read_csv('./assets/data/dados_completos_644_escolas.csv', sep=',', low_memory=False, encoding='latin-1')
 dados.drop(columns='Unnamed: 0', inplace=True)
@@ -126,6 +126,10 @@ layout = html.Div(
     children=[
         html.Div(dcc.Graph(figure=fig, responsive=True)),
         html.Br(),
+        html.P(
+        'Informação Sobre as Escolas Técnicas Profissionalizantes - Censo 2022',
+        style={'fontSize':20, 'color':'white', "font-weight": "bold", 'backgroundColor':'rgb(55, 83, 109)', 'text-align':'left', 'padding-left':'10px'}        
+        ),
         html.Div(dcc.Graph(figure=fig01, responsive=True))
         # html.H3('Tipo de conectividade encontrada nas escolas'),
         # dash_table.DataTable(

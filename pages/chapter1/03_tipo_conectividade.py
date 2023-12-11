@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 
-register_page(__name__, icon="fa:table", name='02 -Tipo de Conectividade Nas Escolas')
+register_page(__name__, icon="fa:table", name='03 - Conectividade Nas Escolas - Tipo')
 #Leitura do dataset
 dados = pd.read_csv('./assets/data/dados_completos_644_escolas.csv', sep=',', low_memory=False)
 dados.drop(columns='Unnamed: 0', inplace=True)
@@ -61,10 +61,14 @@ fig01.add_trace(go.Indicator(
     mode = "number",
     value = dados.loc[dados['TP_REDE_LOCAL'] == 0]['NO_ENTIDADE'].count(),
     domain = {'x': [0, 0.4], 'y': [0.8, 1]},
-    title = {"text": "<span style='font-size:1em'>Não Há Rede Local Interligando Computadores - 2022</span><br>"
+    title = {"text": "<span style='font-size:1em'>Não Há Infraestrutura de Rede de Dados</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
     number = {
-        "font":{"size":68, }
+        "font":{
+            "size":68,
+            'color':'red'
+            },
+        
         },
     )) 
 
@@ -72,27 +76,28 @@ fig01.add_trace(go.Indicator(
     mode = "number",
     value = dados.loc[dados['TP_REDE_LOCAL'] == 1]['TP_REDE_LOCAL'].count(),
     domain = {'x': [0, 0.4], 'y': [0, 0.2]},
-    title = {"text": "<span style='font-size:1em'><br>Rede cabeada - 2022</span><br>"
+    title = {"text": "<span style='font-size:1em'><br>Infraestrutura de Rede Cabeada</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
-    number = {"font":{"size":68, }},
+    number = {"font":{"size":68, 'color':'red'}},
     )) 
 fig01.add_trace(go.Indicator(
     mode = "number",
     value = dados.loc[dados['TP_REDE_LOCAL'] == 2]['TP_REDE_LOCAL'].count(),
     domain = {'x': [0.8, 1], 'y': [0.8, 1]},
-    title = {"text": "<span style='font-size:1em'>Rede sem fio(wi-fi) - 2022</span><br>"
+    title = {"text": "<span style='font-size:1em'>Infraestura de Rede WI-FI</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - 2022 - INEP</span>"},
-    number = {"font":{"size":68, }}
+    number = {"font":{"size":68, 'color':'red'}}
     )) 
 fig01.add_trace(go.Indicator(
     mode = "number",
     value = dados.loc[dados['TP_REDE_LOCAL'] == 3]['TP_REDE_LOCAL'].count(),
     domain = {'x': [0.8, 1], 'y': [0, 0.2]},
-    title = {"text": "<span style='font-size:1em'>Rede cabeada e sem fio(wi-fi) - 2022</span><br>"
+    title = {"text": "<span style='font-size:1em'>Infraestrutura Rede Cabeada e WI-FI</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
     number = {
         "font":{
             "size":68,
+            'color':'red'
             }, 
         
         
@@ -107,8 +112,10 @@ fig01.update_layout(paper_bgcolor = "lightblue")
 
 layout = html.Div(
     children=[
-        html.H3('Tipo de conectividade encontrada nas escolas - Censo 2022'),
-        html.Br(),
+        html.P(
+        'Dados Sobre a Infraestrutura da Rede de Dados nas Escolas - Censo 2022',
+        style={'fontSize':20, 'color':'white', "font-weight": "bold", 'backgroundColor':'rgb(55, 83, 109)', 'text-align':'left', 'padding-left':'10px'}        
+        ),
         html.Div(dcc.Graph(figure=fig01))
     ]
 )

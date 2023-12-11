@@ -73,13 +73,13 @@ sidebar = dmc.Navbar(
                     children=[
                         create_nav_link(
                             icon="radix-icons:home",
-                            label="Inicio",
+                            label="Dados Gerais",
                             href="/",
                         ),
                     ],
                 ),
                 dmc.Divider(
-                    label="Capitulo 1", style={"marginBottom": 20, "marginTop": 20}
+                    label="Dados Conectividade", style={"marginBottom": 20, "marginTop": 20}
                 ),
                 dmc.Stack(
                     children=[

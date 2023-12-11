@@ -7,7 +7,7 @@ import numpy as np
 import plotly.graph_objects as go
 
 #######################################################################################
-register_page(__name__, icon="fa:table", name='Números Escolas da Rede Estadual')
+register_page(__name__, icon="fa:table", name='01 - Rede Estadual -Números')
 #Leitura do dataset
 dados = pd.read_csv('./assets/data/dados_completos_644_escolas.csv', sep=',', low_memory=False)
 dados.drop(columns='Unnamed: 0', inplace=True)
@@ -109,9 +109,17 @@ fig01.update_layout(paper_bgcolor = "lightblue")
 layout = html.Div(children=[
     
     html.Br(),
+    html.P(
+        'Informação Sobre o Número de Escolas e Acesso a Internet - Censo 2022',
+        style={'fontSize':20, 'color':'white', "font-weight": "bold", 'backgroundColor':'rgb(55, 83, 109)', 'text-align':'left', 'padding-left':'10px'}        
+        ),
     html.Div(dcc.Graph(figure=fig, responsive=True)),
     html.Br(),
     html.Br(),
+    html.P(
+        'Informação Sobre o Uso da Internet nas Escolas- Censo 2022',
+        style={'fontSize':20, 'color':'white', "font-weight": "bold", 'backgroundColor':'rgb(55, 83, 109)', 'text-align':'left', 'padding-left':'10px'}        
+        ),
     html.Div(dcc.Graph(figure=fig01, responsive=True)),
     html.Br(),
 ]
