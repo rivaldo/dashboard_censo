@@ -7,15 +7,12 @@ import numpy as np
 import plotly.graph_objects as go
 
 #######################################################################################
-register_page(__name__, icon="fa:table", name='01 - Rede Estadual -Números')
+register_page(__name__, icon="fa:table", name='01 - Rede Estadual')
 #Leitura do dataset
 dados = pd.read_csv('./assets/data/dados_completos_644_escolas.csv', sep=',', low_memory=False)
 dados.drop(columns='Unnamed: 0', inplace=True)
 dados_16_anos = pd.read_csv('./assets/data/censo_estadual_2007_a_2022.csv', sep=',', low_memory=False, encoding='latin-1')
 dados_16_anos.drop(columns='Unnamed: 0', inplace=True)
-
-
-
 #####################################################################################
 
 fig = go.Figure()

@@ -11,7 +11,6 @@ dados = pd.read_csv('./assets/data/censo_estadual_2007_a_2022.csv', sep=',', low
 dados.drop(columns='Unnamed: 0', inplace=True)
 
 #######################################################################################################################
-
 dados = pd.read_csv('./assets/data/dados_completos_644_escolas.csv', sep=',', low_memory=False)
 dados.drop(columns='Unnamed: 0', inplace=True)
 dados_16_anos = pd.read_csv('./assets/data/censo_estadual_2007_a_2022.csv', sep=',', low_memory=False, encoding='latin-1')
