@@ -44,12 +44,9 @@ layout = html.Div([
     Input("ticker", "value"))
 def display_time_series(ticker):
     numero_matriculas_16_anos_cor_raca # replace with your own data source
-    fig = px.line(
+    return px.line(
         numero_matriculas_16_anos_cor_raca,
         x=numero_matriculas_16_anos_cor_raca.index,
         y=ticker,
-        markers=True
+        markers=True,
     )
-   
-    
-    return fig
