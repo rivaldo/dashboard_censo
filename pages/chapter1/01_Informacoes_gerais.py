@@ -55,7 +55,7 @@ fig.add_trace(go.Indicator(
     ))
 
 
-fig.update_layout(paper_bgcolor = "lightblue")
+fig.update_layout(paper_bgcolor = "aliceblue")
 ######################### APRENDIZAGEM E ADMINISTRATIVO ###########################################################
 
 fig01 = go.Figure()
@@ -98,7 +98,7 @@ fig01.add_trace(go.Indicator(
     ))
 
 
-fig01.update_layout(paper_bgcolor = "lightblue")
+fig01.update_layout(paper_bgcolor = "aliceblue")
 
 ############################# ZONA RURAL #######################################################
 fig_zona_rural = go.Figure()
@@ -137,7 +137,7 @@ fig_zona_rural.add_trace(go.Indicator(
 fig_zona_rural.add_trace(go.Indicator(
     mode = "number",
     value = ((dados.loc[(dados['IN_INTERNET'] == 1) & (dados['TP_LOCALIZACAO'] ==2)]['TP_LOCALIZACAO'].count())\
-             /(dados.loc[(dados['TP_LOCALIZACAO'] ==2)]['TP_LOCALIZACAO'].count()))*100,
+            /(dados.loc[(dados['TP_LOCALIZACAO'] ==2)]['TP_LOCALIZACAO'].count()))*100,
     domain = {'x': [0.8, 1], 'y': [0, 0.2]},
     title = {"text": "<span style='font-size:1em'>Percentual das Escolas com Internet</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
@@ -145,7 +145,7 @@ fig_zona_rural.add_trace(go.Indicator(
     ))
 
 
-fig_zona_rural.update_layout(paper_bgcolor = "lightblue")
+fig_zona_rural.update_layout(paper_bgcolor = "aliceblue")
 
 ################################# ZONA URBANA #######################################
 
@@ -193,7 +193,7 @@ fig_zona_urbana.add_trace(go.Indicator(
     ))
 
 
-fig_zona_urbana.update_layout(paper_bgcolor = "lightblue")
+fig_zona_urbana.update_layout(paper_bgcolor = "aliceblue")
 
 #####################################################################################
 layout = html.Div(children=[

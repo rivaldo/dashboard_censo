@@ -55,7 +55,7 @@ fig01.add_trace(go.Indicator(
     ))
 
 
-fig01.update_layout(paper_bgcolor = "lightblue")
+fig01.update_layout(paper_bgcolor = "aliceblue")
 
 ######################################################################################
 

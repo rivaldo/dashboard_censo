@@ -193,10 +193,10 @@ annotations.extend(
 fig.update_layout(
     annotations=annotations,           
     autosize=True,
-    #width=1000,
-    #height=600,
+    width=1400,
+    height=1200,
+    
 )
-
 ########################################################################
 
 
