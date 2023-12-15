@@ -56,7 +56,7 @@ fig.add_trace(go.Indicator(
 
 
 fig.update_layout(paper_bgcolor = "lightblue")
-####################################################################################
+######################### APRENDIZAGEM E ADMINISTRATIVO ###########################################################
 
 fig01 = go.Figure()
 
@@ -100,7 +100,7 @@ fig01.add_trace(go.Indicator(
 
 fig01.update_layout(paper_bgcolor = "lightblue")
 
-######################################################################################
+############################# ZONA RURAL #######################################################
 fig_zona_rural = go.Figure()
 
 fig_zona_rural.add_trace(go.Indicator(
@@ -147,28 +147,76 @@ fig_zona_rural.add_trace(go.Indicator(
 
 fig_zona_rural.update_layout(paper_bgcolor = "lightblue")
 
+################################# ZONA URBANA #######################################
+
+fig_zona_urbana = go.Figure()
+
+fig_zona_urbana.add_trace(go.Indicator(
+    mode = "number",
+    value = dados.loc[(dados['TP_LOCALIZACAO'] ==1)]['TP_LOCALIZACAO'].count(),
+    domain = {'x': [0, 0.4], 'y': [0.8, 1]},
+    title = {"text": "<span style='font-size:1em'>Escolas da Zona Urbana</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {
+        "font":{
+            "size":68,
+            
+            },
+        
+        },
+    )) 
+fig_zona_urbana.add_trace(go.Indicator(
+    mode = "number",
+    value = dados.loc[(dados['IN_INTERNET'] == 1) & (dados['TP_LOCALIZACAO'] ==1)]['TP_LOCALIZACAO'].count(),
+    domain = {'x': [0.8, 1], 'y': [0.8, 1]},
+    title = {"text": "<span style='font-size:1em'>Escolas com Internet </span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - 2022 - INEP</span>"},
+    number = {"font":{"size":68, 'color':'green'}}
+    )) 
+fig_zona_urbana.add_trace(go.Indicator(
+    mode = "number",
+    value = dados.loc[(dados['IN_INTERNET'] == 0) & (dados['TP_LOCALIZACAO'] ==1)]['TP_LOCALIZACAO'].count(),
+    domain = {'x': [0, 0.4], 'y': [0, 0.2]},
+    title = {"text": "<span style='font-size:1em'><br>Escolas Sem Internet </span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {"font":{"size":68, 'color':'red'}},
+    )) 
+
+fig_zona_urbana.add_trace(go.Indicator(
+    mode = "number",
+    value = ((dados.loc[(dados['IN_INTERNET'] == 1) & (dados['TP_LOCALIZACAO'] ==1)]['TP_LOCALIZACAO'].count())\
+             /(dados.loc[(dados['TP_LOCALIZACAO'] ==1)]['TP_LOCALIZACAO'].count()))*100,
+    domain = {'x': [0.8, 1], 'y': [0, 0.2]},
+    title = {"text": "<span style='font-size:1em'>Percentual das Escolas com Internet</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {"font":{"size":68, 'color':'green'}, 'suffix':'%', 'valueformat':'.2f'},    
+    ))
+
+
+fig_zona_urbana.update_layout(paper_bgcolor = "lightblue")
+
 #####################################################################################
 layout = html.Div(children=[
-    
+    html.Meta(httpEquiv="refresh"),
     html.Br(),
     html.P(
-        'Informação Sobre o Número de Escolas e Acesso a Internet - Censo 2022',
+        'Internet na Rede Estadual',
         style={'fontSize':20, 'color':'white', "font-weight": "bold", 'backgroundColor':'rgb(55, 83, 109)', 'text-align':'left', 'padding-left':'10px'}        
         ),
     html.Div(dcc.Graph(figure=fig, responsive=True)),
     html.Br(),
     html.Br(),
     html.P(
-        'Informação Sobre o Uso da Internet nas Escolas- Censo 2022',
+        'Internet nas Escolas da Zona Urbana',
+        style={'fontSize':20, 'color':'white', "font-weight": "bold", 'backgroundColor':'rgb(55, 83, 109)', 'text-align':'left', 'padding-left':'10px'}        
+        ),
+    html.Div(dcc.Graph(figure=fig_zona_urbana, responsive=True)),
+    html.Br(),
+    html.P(
+        'Internet nas Escolas da Zona Rural',
         style={'fontSize':20, 'color':'white', "font-weight": "bold", 'backgroundColor':'rgb(55, 83, 109)', 'text-align':'left', 'padding-left':'10px'}        
         ),
     html.Div(dcc.Graph(figure=fig_zona_rural, responsive=True)),
-    html.Br(),
-    html.P(
-        'Informação Sobre o Uso da Internet nas Escolas- Censo 2022',
-        style={'fontSize':20, 'color':'white', "font-weight": "bold", 'backgroundColor':'rgb(55, 83, 109)', 'text-align':'left', 'padding-left':'10px'}        
-        ),
-    html.Div(dcc.Graph(figure=fig01, responsive=True)),
     html.Br(),
 ]
 )

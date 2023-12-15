@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import dash_bootstrap_components as dbc
 import os
 
+# stylesheet with the .dbc class to style  dcc, DataTable and AG Grid components with a Bootstrap theme
+dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 
 header_style = {
     "display": "flex",  # Use Flexbox layout
@@ -34,10 +36,15 @@ avatar_style = {
 app = dash.Dash(
     __name__, 
     use_pages=True, 
-    external_stylesheets=[dbc.themes.BOOTSTRAP],
+    external_stylesheets=[
+        dbc.themes.BOOTSTRAP,
+        dbc.icons.FONT_AWESOME, 
+        dbc_css]
+    ,
     meta_tags=[
         {"name": "viewport", "content": "width=device-width, initial-scale=1"}
-    ]
+    ],
+    
 )
 
 

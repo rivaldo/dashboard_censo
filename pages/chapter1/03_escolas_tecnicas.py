@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 
-register_page(__name__, icon="fa:table", name='02 - Escolas Técnicas')
+register_page(__name__, icon="fa:table", name='03 - Escolas Técnicas')
 #Leitura do dataset
 dados = pd.read_csv('./assets/data/dados_completos_644_escolas.csv', sep=',', low_memory=False, encoding='latin-1')
 dados.drop(columns='Unnamed: 0', inplace=True)
@@ -118,19 +118,127 @@ fig01.add_trace(go.Indicator(
     ))
 
 
-fig01.update_layout(paper_bgcolor = "lightblue")
+fig01.update_layout(paper_bgcolor = "aliceblue")
+
+###################################### DADOS DA ZONA URBANA ##################################################
+fig_zona_urbana = go.Figure()
+
+fig_zona_urbana.add_trace(go.Indicator(
+    mode = "number",
+    value = dados.loc[(dados['TP_LOCALIZACAO'] ==1) & ((dados['IN_PROF']==1))]['TP_LOCALIZACAO'].count(),
+    domain = {'x': [0, 0.4], 'y': [0.8, 1]},
+    title = {"text": "<span style='font-size:1em'>Escolas Técnicas da Zona Urbana</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {
+        "font":{
+            "size":68,
+            
+            },
+        
+        },
+    )) 
+fig_zona_urbana.add_trace(go.Indicator(
+    mode = "number",
+    value =dados.loc[(dados['IN_INTERNET'] == 1) & (dados['TP_LOCALIZACAO'] ==1) & (dados['IN_PROF'] == 1)]['TP_LOCALIZACAO'].count(),
+    domain = {'x': [0.8, 1], 'y': [0.8, 1]},
+    title = {"text": "<span style='font-size:1em'>Possuem Internet</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - 2022 - INEP</span>"},
+    number = {"font":{"size":68, 'color':'green'}}
+    )) 
+fig_zona_urbana.add_trace(go.Indicator(
+    mode = "number",
+    value = dados.loc[(dados['TP_LOCALIZACAO'] ==1) & (dados['IN_PROF']==1) & (dados['IN_LABORATORIO_INFORMATICA'] == 1)]['TP_LOCALIZACAO'].count(),
+    domain = {'x': [0, 0.4], 'y': [0, 0.2]},
+    title = {"text": "<span style='font-size:1em'><br>Possui Laboratório de Informática </span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {"font":{"size":68, 'color':'red'}},
+    )) 
+
+fig_zona_urbana.add_trace(go.Indicator(
+    mode = "number",
+    value = ((dados.loc[(dados['IN_INTERNET'] == 1) & (dados['TP_LOCALIZACAO'] ==1) & (dados['IN_PROF'] == 1)]['TP_LOCALIZACAO'].count())\
+            /(dados.loc[(dados['TP_LOCALIZACAO'] ==1) & (dados['IN_PROF'] == 1)]['TP_LOCALIZACAO'].count()))*100,
+    domain = {'x': [0.8, 1], 'y': [0, 0.2]},
+    title = {"text": "<span style='font-size:1em'>Percentual das Escolas com Internet</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {"font":{"size":68, 'color':'green'}, 'suffix':'%', 'valueformat':'.2f'},    
+    ))
+
+
+fig_zona_urbana.update_layout(paper_bgcolor = "aliceblue")
 ###############################################################################################################
+fig_zona_rural = go.Figure()
+
+fig_zona_rural.add_trace(go.Indicator(
+    mode = "number",
+    value = dados.loc[(dados['TP_LOCALIZACAO'] ==2) & ((dados['IN_PROF']==1))]['TP_LOCALIZACAO'].count(),
+    domain = {'x': [0, 0.4], 'y': [0.8, 1]},
+    title = {"text": "<span style='font-size:1em'>Escolas Técnicas da Zona Rural</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {
+        "font":{
+            "size":68,
+            
+            },
+        
+        },
+    )) 
+fig_zona_rural.add_trace(go.Indicator(
+    mode = "number",
+    value =dados.loc[(dados['IN_INTERNET'] == 1) & (dados['TP_LOCALIZACAO'] ==2) & (dados['IN_PROF'] == 1)]['TP_LOCALIZACAO'].count(),
+    domain = {'x': [0.8, 1], 'y': [0.8, 1]},
+    title = {"text": "<span style='font-size:1em'>Possuem Internet</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - 2022 - INEP</span>"},
+    number = {"font":{"size":68, 'color':'green'}}
+    )) 
+fig_zona_rural.add_trace(go.Indicator(
+    mode = "number",
+    value = dados.loc[(dados['TP_LOCALIZACAO'] ==2) & (dados['IN_PROF']==1) & (dados['IN_LABORATORIO_INFORMATICA'] == 1)]['TP_LOCALIZACAO'].count(),
+    domain = {'x': [0, 0.4], 'y': [0, 0.2]},
+    title = {"text": "<span style='font-size:1em'><br>Possui Laboratório de Informática </span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {"font":{"size":68, 'color':'red'}},
+    )) 
+
+fig_zona_rural.add_trace(go.Indicator(
+    mode = "number",
+    value = ((dados.loc[(dados['IN_INTERNET'] == 1) & (dados['TP_LOCALIZACAO'] ==2) & (dados['IN_PROF'] == 1)]['TP_LOCALIZACAO'].count())\
+            /(dados.loc[(dados['TP_LOCALIZACAO'] ==2) & (dados['IN_PROF'] == 1)]['TP_LOCALIZACAO'].count()))*100,
+    domain = {'x': [0.8, 1], 'y': [0, 0.2]},
+    title = {"text": "<span style='font-size:1em'>Percentual das Escolas com Internet</span><br>"
+            "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"},
+    number = {"font":{"size":68, 'color':'green'}, 'suffix':'%', 'valueformat':'.0f'},    
+    ))
+
+
+fig_zona_rural.update_layout(paper_bgcolor = "aliceblue")
+############################# DADOS DA ZONA RURAL #############################################################
+
 
 
 layout = html.Div(
     children=[
+        html.Meta(httpEquiv="refresh"),
         html.Div(dcc.Graph(figure=fig, responsive=True)),
         html.Br(),
         html.P(
-        'Informação Sobre as Escolas Técnicas Profissionalizantes - Censo 2022',
+        'Informação Sobre as Escolas Técnicas Profissionalizantes',
         style={'fontSize':20, 'color':'white', "font-weight": "bold", 'backgroundColor':'rgb(55, 83, 109)', 'text-align':'left', 'padding-left':'10px'}        
         ),
-        html.Div(dcc.Graph(figure=fig01, responsive=True))
+        html.Div(dcc.Graph(figure=fig01, responsive=True)),
+        html.Br(),
+        html.P(
+        'Escolas Técnicas Profissionalizantes - Zona Urbana',
+        style={'fontSize':20, 'color':'white', "font-weight": "bold", 'backgroundColor':'rgb(55, 83, 109)', 'text-align':'left', 'padding-left':'10px'}        
+        ),
+        html.Div(dcc.Graph(figure=fig_zona_urbana, responsive=True)),
+        html.Br(),
+        html.P(
+        'Informação Sobre as Escolas Técnicas Profissionalizantes - Zona Rural',
+        style={'fontSize':20, 'color':'white', "font-weight": "bold", 'backgroundColor':'rgb(55, 83, 109)', 'text-align':'left', 'padding-left':'10px'}        
+        ),
+        html.Div(dcc.Graph(figure=fig_zona_rural, responsive=True)),
+        html.Br()
         # html.H3('Tipo de conectividade encontrada nas escolas'),
         # dash_table.DataTable(
         #     id='table',
