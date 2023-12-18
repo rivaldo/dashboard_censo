@@ -101,7 +101,7 @@ fig_infra_toda_rede.add_trace(
             "text": "<span style='font-size:1em'><br>Infraestrutura de Rede Cabeada</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"
         },
-         number={
+        number={
             "font": {"size": 68, "color": "red", }, 'suffix':'%', 'valueformat':'.0f'
         },
     )
@@ -147,8 +147,8 @@ fig_infra_zona_urbana = go.Figure()
 fig_infra_zona_urbana.add_trace(
     go.Indicator(
         mode="number",
-        value=(dados.loc[(dados["TP_REDE_LOCAL"] == 0)& (dados['TP_LOCALIZACAO'] == 1)]["NO_ENTIDADE"].count())/\
-            (dados.loc[dados['TP_LOCALIZACAO'] == '1']['TP_LOCALIZACAO'].sum()),
+        value=(dados.loc[(dados["TP_REDE_LOCAL"] == 0) & (dados['TP_LOCALIZACAO'] == 1)]["NO_ENTIDADE"].count())/\
+    (dados.loc[dados['TP_LOCALIZACAO'] == 1]['NO_ENTIDADE'].count())*100,
         domain={"x": [0, 0.4], "y": [0.8, 1]},
         title={
             "text": "<span style='font-size:1em'>Não Há Infraestrutura de Rede de Dados</span><br>"
@@ -163,38 +163,41 @@ fig_infra_zona_urbana.add_trace(
 fig_infra_zona_urbana.add_trace(
     go.Indicator(
         mode="number",
-        value=dados.loc[(dados["TP_REDE_LOCAL"] == 1 ) & (dados['TP_LOCALIZACAO'] == 1)]["TP_REDE_LOCAL"].count(),
+        value=(dados.loc[(dados["TP_REDE_LOCAL"] == 1) & (dados['TP_LOCALIZACAO'] == 1)]["NO_ENTIDADE"].count())/\
+    (dados.loc[dados['TP_LOCALIZACAO'] == 1]['NO_ENTIDADE'].count())*100,
         domain={"x": [0, 0.4], "y": [0, 0.2]},
         title={
             "text": "<span style='font-size:1em'><br>Infraestrutura de Rede Cabeada</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"
         },
-        number={"font": {"size": 68, "color": "red"}},
+        number={"font": {"size": 68, "color": "red"}, 'suffix':'%', 'valueformat':'.0f'},
     )
 )
 fig_infra_zona_urbana.add_trace(
     go.Indicator(
         mode="number",
-        value=dados.loc[(dados["TP_REDE_LOCAL"] == 2) & (dados['TP_LOCALIZACAO'] == 1)]["TP_REDE_LOCAL"].count(),
+        value=(dados.loc[(dados["TP_REDE_LOCAL"] == 2) & (dados['TP_LOCALIZACAO'] == 1)]["NO_ENTIDADE"].count())/\
+    (dados.loc[dados['TP_LOCALIZACAO'] == 1]['NO_ENTIDADE'].count())*100,
         domain={"x": [0.8, 1], "y": [0.8, 1]},
         title={
             "text": "<span style='font-size:1em'>Infraestura de Rede WI-FI</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - 2022 - INEP</span>"
         },
-        number={"font": {"size": 68, "color": "red"}},
+        number={"font": {"size": 68, "color": "red"}, 'suffix':'%', 'valueformat':'.0f'},
     )
 )
 fig_infra_zona_urbana.add_trace(
     go.Indicator(
         mode="number",
-        value=dados.loc[(dados["TP_REDE_LOCAL"] == 3) & (dados['TP_LOCALIZACAO'] == 1)]["TP_REDE_LOCAL"].count(),
+        value=(dados.loc[(dados["TP_REDE_LOCAL"] == 3) & (dados['TP_LOCALIZACAO'] == 1)]["NO_ENTIDADE"].count())/\
+    (dados.loc[dados['TP_LOCALIZACAO'] == 1]['NO_ENTIDADE'].count())*100,
         domain={"x": [0.8, 1], "y": [0, 0.2]},
         title={
             "text": "<span style='font-size:1em'>Infraestrutura Rede Cabeada e WI-FI</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"
         },
         number={
-            "font": {"size": 68, "color": "red"},
+            "font": {"size": 68, "color": "red"}, 'suffix':'%', 'valueformat':'.0f'
         },
     )
 )
@@ -206,14 +209,15 @@ fig_infra_zona_rural = go.Figure()
 fig_infra_zona_rural.add_trace(
     go.Indicator(
         mode="number",
-        value=dados.loc[(dados["TP_REDE_LOCAL"] == 0)  & (dados['TP_LOCALIZACAO'] == 2)]["NO_ENTIDADE"].count(),
+        value=(dados.loc[(dados["TP_REDE_LOCAL"] == 0) & (dados['TP_LOCALIZACAO'] == 2)]["NO_ENTIDADE"].count())/\
+    (dados.loc[dados['TP_LOCALIZACAO'] == 2]['NO_ENTIDADE'].count())*100,
         domain={"x": [0, 0.4], "y": [0.8, 1]},
         title={
             "text": "<span style='font-size:1em'>Não Há Infraestrutura de Rede de Dados</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"
         },
         number={
-            "font": {"size": 68, "color": "red"},
+            "font": {"size": 68, "color": "red"}, 'suffix':'%', 'valueformat':'.0f'
         },
     )
 )
@@ -221,38 +225,41 @@ fig_infra_zona_rural.add_trace(
 fig_infra_zona_rural.add_trace(
     go.Indicator(
         mode="number",
-        value=dados.loc[(dados["TP_REDE_LOCAL"] == 1) & (dados['TP_LOCALIZACAO'] == 2)]["TP_REDE_LOCAL"].count(),
+        value=(dados.loc[(dados["TP_REDE_LOCAL"] == 1) & (dados['TP_LOCALIZACAO'] == 2)]["NO_ENTIDADE"].count())/\
+    (dados.loc[dados['TP_LOCALIZACAO'] == 2]['NO_ENTIDADE'].count())*100,
         domain={"x": [0, 0.4], "y": [0, 0.2]},
         title={
             "text": "<span style='font-size:1em'><br>Infraestrutura de Rede Cabeada</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"
         },
-        number={"font": {"size": 68, "color": "red"}},
+        number={"font": {"size": 68, "color": "red"}, 'suffix':'%', 'valueformat':'.0f'},
     )
 )
 fig_infra_zona_rural.add_trace(
     go.Indicator(
         mode="number",
-        value=dados.loc[(dados["TP_REDE_LOCAL"] == 2)  & (dados['TP_LOCALIZACAO'] == 2)]["TP_REDE_LOCAL"].count(),
+        value=(dados.loc[(dados["TP_REDE_LOCAL"] == 2) & (dados['TP_LOCALIZACAO'] == 2)]["NO_ENTIDADE"].count())/\
+    (dados.loc[dados['TP_LOCALIZACAO'] == 2]['NO_ENTIDADE'].count())*100,
         domain={"x": [0.8, 1], "y": [0.8, 1]},
         title={
             "text": "<span style='font-size:1em'>Infraestura de Rede WI-FI</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - 2022 - INEP</span>"
         },
-        number={"font": {"size": 68, "color": "red"}},
+        number={"font": {"size": 68, "color": "red"}, 'suffix':'%', 'valueformat':'.0f'},
     )
 )
 fig_infra_zona_rural.add_trace(
     go.Indicator(
         mode="number",
-        value=dados.loc[(dados["TP_REDE_LOCAL"] == 3)  & (dados['TP_LOCALIZACAO'] == 2)]["TP_REDE_LOCAL"].count(),
+        value=(dados.loc[(dados["TP_REDE_LOCAL"] == 3) & (dados['TP_LOCALIZACAO'] == 2)]["NO_ENTIDADE"].count())/\
+    (dados.loc[dados['TP_LOCALIZACAO'] == 2]['NO_ENTIDADE'].count())*100,
         domain={"x": [0.8, 1], "y": [0, 0.2]},
         title={
             "text": "<span style='font-size:1em'>Infraestrutura Rede Cabeada e WI-FI</span><br>"
             "<span style='font-size:0.5em;color:gray'>Fonte: Microdados - Cernso 2022 - INEP</span>"
         },
         number={
-            "font": {"size": 68, "color": "red"},
+            "font": {"size": 68, "color": "red"}, 'suffix':'%', 'valueformat':'.0f'
         },
     )
 )
