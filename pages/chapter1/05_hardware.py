@@ -142,7 +142,7 @@ fig_quantidade_tablets.update_layout(paper_bgcolor = "aliceblue")
 #########################################################################################################
 
 layout = html.Div(children=[
-    html.Meta(httpEquiv="refresh"),
+    html.Script('window.location.reload();'),
     html.Br(),
     html.P(
         'Informação sobre Desktops para Uso dos Alunos nas Escolas - Censo 2022',
